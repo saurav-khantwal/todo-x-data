@@ -92,7 +92,6 @@ def add_item_page():
     form = AddItem()
     now = datetime.now()
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-    print(dt_string)
     if request.method == 'POST':
         if form.validate_on_submit():
             item_to_add = TodoList(title=form.title.data,
