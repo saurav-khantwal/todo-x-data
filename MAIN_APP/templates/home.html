@@ -1,16 +1,23 @@
 {% extends 'base.html' %}
 {% block title %}
-  Home page
+Home page
 {% endblock %}
 
 {% block content %}
-<div class="jumbotron text-center bg-dark" style="height: 100vh;">
-  <h1 class="display-4">TODO APPLICATION 🤩!</h1>
-  <p class="lead">Easy to use TODO application with User authentication.</p>
-  <hr class="my-4">
-  <p>Organize your activities now.</p>
-  <p class="lead">
-    <a class="btn btn-success btn-lg" href="{{url_for('todo_page')}}" role="button">Your list</a>
-  </p>
+
+<style>
+
+</style>
+<div class="jumbotron text-center bg-dark p-5" style="height: 100vh;" >
+    <div class="container">
+        <h1 class="display-4" style="font-size:5vw;">TODO APPLICATION 🤩!</h1>
+        <p class="lead" style="font-size:3vw;">Easy to use TODO application with User authentication.</p>
+        <hr class="my-4">
+        <p style="font-size:3vw;">Organize your activities now.</p>
+        <p class="lead" style="font-size:3vw;">
+            <a class="btn btn-success btn-lg" style="font-size:3vw;" href="{{url_for('todo_page')}}" role="button">Your list</a>
+        </p>
+    </div>
 </div>
+
 {% endblock %}
