@@ -1,6 +1,6 @@
 from MAIN_APP import db, login_manager
 from flask_login import UserMixin
-from sqlalchemy import DateTime
+from sqlalchemy import DateTime, TIMESTAMP
 
 
 @login_manager.user_loader
@@ -25,7 +25,7 @@ class TodoList(db.Model):
     title = db.Column(db.String(length=80), nullable=False)
     description = db.Column(db.String(length=500), nullable=False)
     owned_user = db.Column(db.Integer(), db.ForeignKey('User.id'))
-    date_created = db.Column(db.DateTime(timezone=True), nullable=False)
+    date_created = db.Column(db.TIMESTAMP(timezone=True), nullable=False)
 
     def delete_list_item(self):
         TodoList.query.filter_by(id=self.id).delete()

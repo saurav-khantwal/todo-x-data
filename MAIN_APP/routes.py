@@ -5,6 +5,7 @@ from MAIN_APP.models import User, TodoList
 from flask_login import login_user, logout_user, login_required, current_user
 from datetime import datetime
 from sqlalchemy import desc
+from sqlalchemy.sql.functions import current_timestamp
 
 
 @app.route('/')
@@ -55,13 +56,12 @@ def todo_page():
     edit_form = Edit_Form()
 
     if request.method == 'POST':
-        #Logic for deletion of activity
+        # Logic for deletion of activity
         delete_item = request.form.get('delete_item')
         d_item_obj = TodoList.query.filter_by(id=delete_item).first()
         if d_item_obj:
             d_item_obj.delete_list_item()
             flash(f'The list item {d_item_obj.title} is deleted', category='info')
-
 
         edit_item = request.form.get('edit_item')
         e_item_obj = TodoList.query.filter_by(id=edit_item).first()
@@ -90,14 +90,12 @@ def logout_page():
 @login_required
 def add_item_page():
     form = AddItem()
-    now = datetime.now()
-    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     if request.method == 'POST':
         if form.validate_on_submit():
             item_to_add = TodoList(title=form.title.data,
                                    description=form.description.data,
                                    owned_user=current_user.id,
-                                   date_created=dt_string)
+                                   date_created=current_timestamp())
             db.session.add(item_to_add)
             db.session.commit()
             flash('Your activity is added to Your List!', category='success')
